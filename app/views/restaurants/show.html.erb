@@ -1,0 +1,29 @@
+<div class="container my-3">
+<h1>Restaurant</h1>
+  <div>
+    <%= render @restaurant %>
+  </div>
+  <div class="my-2 border-top">
+    <h2>Reviews</h2>
+    <ul>
+      <% @restaurant.reviews.each do |review| %>
+        <li>
+          <%= review.content %> <br>
+          Rating: <%= review.rating %> ⭐️
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="my-2 border-top">
+    <h3>Write a new review for <%= @restaurant.name %></h3>
+
+    <%= simple_form_for([@restaurant, @review]) do |f| %>
+      <%= f.input :content %>
+      <%= f.collection_radio_buttons :rating, [[1], [2], [3], [4], [5]], :first, :last %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+  <div class="my-4 border-top">
+    <%= link_to "Back to restaurants", restaurants_path %>
+  </div>
+</div>
